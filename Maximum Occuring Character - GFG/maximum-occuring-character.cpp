@@ -5,33 +5,26 @@ using namespace std;
 
 // } Driver Code Ends
 
-
 class Solution
 {
     public:
+    map<char,int> mp;
     //Function to find the maximum occurring character in a string.
     char getMaxOccuringChar(string str)
     {
-        int arr[26] = {0}; //count array whose index are alphabets a= 0, b =1...
-        // create an array of count of chracters
-        
-        for(int i = 0;i<str.length();i++){
-            char ch = str[i];
-            int num = 0;
-            num = ch-'a';
-            arr[num]++;
+        // Your code here
+         for(auto it: str){ //map me sb dala 
+            mp[it]++;
         }
-        // find max occ char
-        int maxi = -1, ans = 0;
-        for(int i = 0;i<26;i++){
-            if(maxi <arr[i]){
-                ans = i;
-                maxi = arr[i];
+        int max = INT_MIN;
+        char ans='z' ;
+        for(auto it : mp){
+            if(it.second > max){
+                max = it.second;
+                ans = it.first;
             }
         }
-        
-        
-        return 'a'+ans;
+        return ans;
     }
 
 };
