@@ -1,37 +1,36 @@
-// { Driver Code Starts
+//{ Driver Code Starts
 //Initial template for C++
 
 #include<bits/stdc++.h>
 using namespace std;
 
- // } Driver Code Ends
+// } Driver Code Ends
 //User function template for C++
-// #include<stack>
+
 class Solution
 {
     public:
-     void solve(stack<int>&s,int count, int size){
-         //base case
-         if(count == size/2){
-             s.pop();
-             return ;
-         }
-         int num = s.top();
-         s.pop();
-         //recursive call 
-         solve(s,count+1,size);
-         
-         s.push(num);
-     }
     //Function to delete middle element of a stack.
-    void deleteMid(stack<int>&s, int size)
+    void deleteMid(stack<int>&s, int sizeOfStack)
     {
-    int count =0;
-    solve(s,count,size);
+        stack<int> s2;
+        int mid = (sizeOfStack/2) ;
+        
+        while(mid--){
+            s2.push(s.top());
+            s.pop();
+            // mid--;
+        }
+                    s.pop();
+
+        while(!s2.empty()){
+            s.push(s2.top());
+            s2.pop();
+        }
     }
 };
 
-// { Driver Code Starts.
+//{ Driver Code Starts.
 int main() {
     int t;
     cin>>t;
@@ -61,4 +60,5 @@ int main() {
     }   
     return 0;
 }
-  // } Driver Code Ends
+
+// } Driver Code Ends
