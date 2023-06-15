@@ -6,7 +6,7 @@ using namespace std;
 // } Driver Code Ends
 class Solution{
 public:
-// node: An integer representing the node for which we want to check the safety of assigning a color.
+    // node: An integer representing the node for which we want to check the safety of assigning a color.
 // color: An array of integers representing the assigned color for each node in the graph.
 //  col: An integer representing the color we want to check the safety of assigning to the given node.
  
@@ -47,7 +47,6 @@ bool graphColoring(bool graph[101][101], int m, int N) {
   if (solve(0, color, m, N, graph)) return true;
   return false;
 }
-
 };
 
 //{ Driver Code Starts.
