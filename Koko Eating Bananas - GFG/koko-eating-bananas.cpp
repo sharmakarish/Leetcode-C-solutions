@@ -3,10 +3,12 @@
 using namespace std;
 
 // } Driver Code Ends
+
+
 class Solution {
-  public:
-    int Solve(int N, vector<int>& piles, int h) {
-       int n = piles.size();
+public:
+    int Solve(int n ,vector<int>& piles, int h) {
+        
         int low = 1;
         int high = 1e9;
 
