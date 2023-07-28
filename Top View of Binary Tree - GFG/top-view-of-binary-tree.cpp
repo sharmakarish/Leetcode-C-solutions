@@ -122,7 +122,7 @@ class Solution
           while(!q.empty()){
               pair<Node*, int> temp = q.front();
               q.pop();
-              Node* frontNode = temp.first; //present the element 
+              Node* frontNode = temp.first; //first element 
               int hd = temp.second;
               
  //   if already a value present for H.D then do nothing, don't add
@@ -145,6 +145,9 @@ class Solution
 
 };
 
+// Time Complexity: O(N)
+
+// Space Complexity: O(N)
 
 
 //{ Driver Code Starts.
