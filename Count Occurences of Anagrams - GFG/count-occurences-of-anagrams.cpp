@@ -9,36 +9,51 @@ using namespace std;
 class Solution{
 public:
 	int search(string pat, string txt) {
-	   int n = txt.length(); //length of txt
-	   int k = pat.length(); //windpw size
-	    // variable to store count of the occurences of anagrams of word in the text
-        int ans = 0; 
-        
-        //storing freq of char in string : pat
-        vector<int> hashpat(26,0);
-        
-        for(int i =0;i<k;i++){
-            hashpat[pat[i]-'a']++;
-        }
-        // storing frequency of characters in string : txt
-            vector<int>hashTxt(26,0);
-            
-        int i = 0 , j = 0; // start of window and end of window
-        
-        while(j < n){
-            hashTxt[txt[j]-'a']++; //decrementing freq of that char from txt map 
-           
-            if(j-i+1 ==k){ //condition on hitting window size
-                if(hashTxt == hashpat) //freq of  char matched 
-                ans++;
-                
-               hashTxt[txt[i] - 'a']--; // to maintain the size of window
-               i++;
+	  unordered_map<char, int> mp;
+    int ans = 0;
+    
+    //storing the occ. of string p in the map
+    for (auto &x : pat){
+        mp[x]++;
+    }
+
+    int count = mp.size();
+    int k = pat.size();
+    int i=0, j=0;
+
+    while (j < txt.size()){
+        //calculation part
+        if (mp.find(txt[j]) != mp.end()){
+            mp[txt[j]]--;
+            if (mp[txt[j]] == 0){
+                count--;
             }
-            //when j < k so increment j
+        }
+
+        //window length not achived yet
+        if (j-i+1 < k){
             j++;
         }
-        return ans;
+
+        //window length achived, find ans and slide the window
+        else if (j-i+1 == k){
+            //finding the ans
+            if (count == 0){
+                ans++;
+            }
+            if (mp.find(txt[i]) != mp.end()){
+                mp[txt[i]]++;
+                if (mp[txt[i]] == 1){
+                    count++;
+                }
+            }
+
+            //slide the window
+            i++;
+            j++;
+        }
+    }
+    return ans;
 	}
 
 };
