@@ -4,37 +4,39 @@ using namespace std;
 
 
 // } Driver Code Ends
+
+//TABULATION 
+
 class Solution
 {
     public:
-    //Function to return max value that can be put in knapsack of capacity W.
+    //Function to return max val that can be put in knapsack of capacity W.
     
-    int f(int i,int w, int wt[], int val[],vector<vector<int>> &dp){
-        //base case 
-        if(i == 0){
-            if(wt[0] <= w){
-                return val[0];  
-            }else{  
-                return 0;       
-            }
-        }
 
-if(dp[i][w] != -1){
-    return dp[i][w];
-}
-        int notpick = 0 + f(i-1,w,wt,val,dp);
-        int pick = INT_MIN;
-        if(wt[i] <= w){     pick = val[i] +  f(i-1,w-wt[i],wt,val,dp);        }
-        
-        return dp[i][w] =  max(pick ,notpick);
-    }
     
     int knapSack(int w, int wt[], int val[], int n) 
-    { 
-        vector<vector<int>> dp(n,vector<int> (w+1,-1));
-       return f(n-1,w,wt,val,dp);
+    {  // Create a 2D vector to store the dynamic programming table
+        vector<vector<int>> dp(n, vector<int>(w + 1, 0));
+        
+        // Initialize the first row (base case)
+        for(int k = wt[0]; k <= w; k++) {
+            dp[0][k] = val[0];
+        }
+    
+        // Populate the dynamic programming table
+        for(int ind = 1; ind < n; ind++) {
+            for(int weight = 0; weight <= w; weight++) {
+                int nottake = dp[ind-1][weight];
+                int take = (wt[ind] <= weight) ? val[ind] + dp[ind-1][weight - wt[ind]] : INT_MIN;
+                dp[ind][weight] = max(take, nottake);
+            }
+        }
+        
+        return dp[n-1][w];
     }
 };
+
+
 
 //{ Driver Code Starts.
 
