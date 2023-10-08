@@ -10,27 +10,30 @@ using namespace std;
 
 class Solution{
   public:
-    int f(int i,int price[],int rodLen,int n,vector<vector<int>>& dp)
-{
-    // Base Case
-    if(rodLen==0) return 0;
-    if(i==n) return -1e9;
 
-    if(dp[i][rodLen]!=-1) return dp[i][rodLen];
-
-    // Take or Nottake
-    int nottake=f(i+1,price,rodLen,n,dp);
-    int take=-1e9;
-    if(rodLen>=(i+1))
-    take=price[i]+f(i,price,rodLen-(i+1),n,dp);
-
-    // return maximum out of them
-    return dp[i][rodLen]=max(take,nottake);
-}
 int cutRod(int price[], int n) {
-    vector<vector<int>> dp(n,vector<int>(n+1,-1));
-    return f(0,price,n,n,dp);
+
+    //varying parameter => ind and n 
+    vector<vector<int>> dp(n, vector<int> (n+1,0));
+    
+    //base case
+    for(int j = 0; j<= n;j++){
+        dp[0][j] = price[0]*j;
+    }
+    
+    for(int ind = 1; ind<n ;ind++){
+        for(int j = 0;j<= n;j++){
+             int notpick = 0 +  dp[ind-1][j];
+             int pick = INT_MIN;
+             int rod = ind+1;
+             if(rod <= j){  pick = price[ind] + dp[ind][j - rod];}
+    
+    dp[ind][j] = max(pick, notpick);
+        }
+    }
+    return dp[n-1][n];
 }
+
 };
 
 //{ Driver Code Starts.
