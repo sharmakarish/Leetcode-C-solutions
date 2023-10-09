@@ -27,13 +27,16 @@ class Solution {
   public:
     // Function to count nodes of a linked list.
     bool searchKey(int n, struct Node* head, int key) {
-       while(head != NULL){
-           if(head->data == key){
-               return true;
-           }
-           head = head->next;
-       }
-       return false;
+        Node* temp = head;
+        bool flag = false;
+        while(temp != NULL){
+            if(temp->data == key){
+                flag = true;
+            }
+            temp = temp->next;
+        }
+        if(flag == true){return true;}
+        else{return false;}
     }
 };
 
